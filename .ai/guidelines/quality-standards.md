@@ -49,4 +49,30 @@ Two GitHub Actions workflows enforce the same gate on every push/PR:
 `.github/workflows/tests.yml` (Larastan, tsc, Playwright browser tests, and the
 coverage-gated test suite).
 
+## Required status checks (branch protection)
+
+`main` is protected so that **nothing merges unless the quality gate is green**.
+Changes must go through a pull request, and these checks must pass before merge:
+
+- `quality` — the lint workflow (Pint, Rector, ESLint, Prettier)
+- `ci (8.4)` and `ci (8.5)` — the test workflow on each supported PHP version
+
+This is a GitHub repository setting, not a file in the repo (a guideline cannot
+block a merge on its own). Enable it once, with admin rights, via:
+
+```bash
+gh api -X PUT repos/fabpl/laravel-react-teams-starter-kit/branches/main/protection \
+  --input - <<'JSON'
+{
+  "required_status_checks": { "strict": true, "contexts": ["quality", "ci (8.4)", "ci (8.5)"] },
+  "enforce_admins": false,
+  "required_pull_request_reviews": { "required_approving_review_count": 0 },
+  "restrictions": null
+}
+JSON
+```
+
+`strict: true` also requires the branch to be up to date with `main` before
+merging. Set `enforce_admins: true` if even admins must not bypass the gate.
+
 See also: [php-conventions], [frontend-conventions], [testing-conventions].
