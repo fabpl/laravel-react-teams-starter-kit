@@ -1,6 +1,7 @@
 import { Link } from '@inertiajs/react';
 import type { PropsWithChildren } from 'react';
 import AppLogoIcon from '@/components/app-logo-icon';
+import { LanguageSwitcher } from '@/components/language-switcher';
 import {
     Card,
     CardContent,
@@ -8,6 +9,7 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+import { useTranslation } from '@/lib/i18n';
 import { home } from '@/routes';
 
 export default function AuthCardLayout({
@@ -19,8 +21,15 @@ export default function AuthCardLayout({
     title?: string;
     description?: string;
 }>) {
+    const { t } = useTranslation();
+    const translatedTitle = title ? t(title) : '';
+    const translatedDescription = description ? t(description) : '';
+
     return (
-        <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10">
+        <div className="relative flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10">
+            <div className="absolute top-4 right-4">
+                <LanguageSwitcher />
+            </div>
             <div className="flex w-full max-w-md flex-col gap-6">
                 <Link
                     href={home()}
@@ -34,8 +43,8 @@ export default function AuthCardLayout({
                 <div className="flex flex-col gap-6">
                     <Card className="rounded-xl">
                         <CardHeader className="px-10 pt-8 pb-0 text-center">
-                            <CardTitle className="text-xl">{title}</CardTitle>
-                            <CardDescription>{description}</CardDescription>
+                            <CardTitle className="text-xl">{translatedTitle}</CardTitle>
+                            <CardDescription>{translatedDescription}</CardDescription>
                         </CardHeader>
                         <CardContent className="px-10 py-8">
                             {children}
