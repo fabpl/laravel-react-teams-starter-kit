@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Concerns;
 
 use App\Data\TeamPermissions;
@@ -74,6 +76,19 @@ trait HasTeams
         return $this->teams()
             ->where('is_personal', true)
             ->first();
+    }
+
+    /**
+     * Get the user's personal team, failing if it does not exist.
+     *
+     * Every user is provisioned with a personal team on registration, so this
+     * invariant should always hold.
+     */
+    public function personalTeamOrFail(): Team
+    {
+        return $this->teams()
+            ->where('is_personal', true)
+            ->firstOrFail();
     }
 
     /**
@@ -180,10 +195,13 @@ trait HasTeams
 
     public function fallbackTeam(?Team $excluding = null): ?Team
     {
-        return $this->teams()
-            ->when($excluding, fn ($query) => $query->where('teams.id', '!=', $excluding->id))
-            ->orderByRaw('LOWER(teams.name)')
-            ->first();
+        $query = $this->teams()->orderByRaw('LOWER(teams.name)');
+
+        if ($excluding instanceof Team) {
+            $query->where('teams.id', '!=', $excluding->id);
+        }
+
+        return $query->first();
     }
 
     /**

@@ -43,7 +43,7 @@ jobs:
           node-version: '22'
 
       - name: Install Node Dependencies
-        run: npm i
+        run: npm ci
 
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
@@ -57,8 +57,16 @@ jobs:
       - name: Build Assets
         run: npm run build
 
-      - name: Run Type Analysis
+      - name: Run PHP Static Analysis (Larastan)
         run: composer types:check
 
-      - name: Tests
-        run: php artisan test
+      - name: Run Frontend Type Check (tsc)
+        run: npm run types:check
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Tests with coverage
+        run: php artisan test --coverage --min=95
+        env:
+          XDEBUG_MODE: coverage

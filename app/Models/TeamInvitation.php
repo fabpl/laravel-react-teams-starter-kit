@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Enums\TeamRole;
@@ -10,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use Override;
 
 /**
  * @property int $id
@@ -30,20 +33,6 @@ class TeamInvitation extends Model
 {
     /** @use HasFactory<TeamInvitationFactory> */
     use HasFactory;
-
-    /**
-     * Bootstrap the model and its traits.
-     */
-    protected static function boot(): void
-    {
-        parent::boot();
-
-        static::creating(function (TeamInvitation $invitation) {
-            if (empty($invitation->code)) {
-                $invitation->code = Str::random(64);
-            }
-        });
-    }
 
     /**
      * Get the team that the invitation belongs to.
@@ -90,10 +79,35 @@ class TeamInvitation extends Model
     }
 
     /**
+     * Get the route key for the model.
+     */
+    #[Override]
+    public function getRouteKeyName(): string
+    {
+        return 'code';
+    }
+
+    /**
+     * Bootstrap the model and its traits.
+     */
+    #[Override]
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        static::creating(function (TeamInvitation $invitation): void {
+            if (empty($invitation->code)) {
+                $invitation->code = Str::random(64);
+            }
+        });
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
      */
+    #[Override]
     protected function casts(): array
     {
         return [
@@ -101,13 +115,5 @@ class TeamInvitation extends Model
             'expires_at' => 'datetime',
             'accepted_at' => 'datetime',
         ];
-    }
-
-    /**
-     * Get the route key for the model.
-     */
-    public function getRouteKeyName(): string
-    {
-        return 'code';
     }
 }

@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Enums\TeamRole;
 use App\Models\Team;
 use App\Models\TeamInvitation;
 use App\Models\User;
 
-test('expired invitations are deleted by the scheduled cleanup', function () {
-    $this->travelTo(now()->startOfDay());
+test('expired invitations are deleted by the scheduled cleanup', function (): void {
+    $this->travelTo(today());
 
     $owner = User::factory()->create();
     $team = Team::factory()->create();

@@ -1,18 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Enums\TeamRole;
 use App\Models\Team;
 use App\Models\TeamInvitation;
 use App\Models\User;
 use Inertia\Testing\AssertableInertia as Assert;
 
-test('registration screen can be rendered', function () {
+test('registration screen can be rendered', function (): void {
     $response = $this->get(route('register'));
 
     $response->assertOk();
 });
 
-test('registration screen includes team invitation context', function () {
+test('registration screen includes team invitation context', function (): void {
     $owner = User::factory()->create();
     $team = Team::factory()->create(['name' => 'Laravel Team']);
     $team->members()->attach($owner, ['role' => TeamRole::Owner->value]);
@@ -26,14 +28,14 @@ test('registration screen includes team invitation context', function () {
     $response = $this->get(route('register', ['invitation' => $invitation->code]));
 
     $response->assertOk();
-    $response->assertInertia(fn (Assert $page) => $page
+    $response->assertInertia(fn (Assert $page): Assert => $page
         ->component('auth/register')
         ->where('teamInvitation.code', $invitation->code)
         ->where('teamInvitation.teamName', 'Laravel Team'),
     );
 });
 
-test('new users can register', function () {
+test('new users can register', function (): void {
     $response = $this->post(route('register.store'), [
         'name' => 'Test User',
         'email' => 'test@example.com',
