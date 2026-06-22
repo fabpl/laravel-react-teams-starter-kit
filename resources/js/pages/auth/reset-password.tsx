@@ -49,7 +49,7 @@ export default function ResetPassword({ token, email, passwordRules }: Props) {
 
                         <div className="grid gap-2">
                             <Label htmlFor="password">
-                                {t('auth.password')}
+                                {t('auth.password_field')}
                             </Label>
                             <PasswordInput
                                 id="password"
@@ -57,7 +57,7 @@ export default function ResetPassword({ token, email, passwordRules }: Props) {
                                 autoComplete="new-password"
                                 className="mt-1 block w-full"
                                 autoFocus
-                                placeholder={t('auth.password')}
+                                placeholder={t('auth.password_field')}
                                 passwordrules={passwordRules}
                             />
                             <InputError message={errors.password} />

@@ -73,7 +73,7 @@ export default function Register({ passwordRules, teamInvitation }: Props) {
 
                             <div className="grid gap-2">
                                 <Label htmlFor="password">
-                                    {t('auth.password')}
+                                    {t('auth.password_field')}
                                 </Label>
                                 <PasswordInput
                                     id="password"
@@ -81,7 +81,7 @@ export default function Register({ passwordRules, teamInvitation }: Props) {
                                     tabIndex={3}
                                     autoComplete="new-password"
                                     name="password"
-                                    placeholder={t('auth.password')}
+                                    placeholder={t('auth.password_field')}
                                     passwordrules={passwordRules}
                                 />
                                 <InputError message={errors.password} />

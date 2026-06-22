@@ -34,12 +34,12 @@ export default function ConfirmPassword() {
                     <div className="space-y-6">
                         <div className="grid gap-2">
                             <Label htmlFor="password">
-                                {t('auth.password')}
+                                {t('auth.password_field')}
                             </Label>
                             <PasswordInput
                                 id="password"
                                 name="password"
-                                placeholder={t('auth.password')}
+                                placeholder={t('auth.password_field')}
                                 autoComplete="current-password"
                                 autoFocus
                             />

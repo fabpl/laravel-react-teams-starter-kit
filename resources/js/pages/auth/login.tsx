@@ -67,7 +67,7 @@ export default function Login({
                             <div className="grid gap-2">
                                 <div className="flex items-center">
                                     <Label htmlFor="password">
-                                        {t('auth.password')}
+                                        {t('auth.password_field')}
                                     </Label>
                                     {canResetPassword && (
                                         <TextLink
@@ -85,7 +85,7 @@ export default function Login({
                                     required
                                     tabIndex={2}
                                     autoComplete="current-password"
-                                    placeholder={t('auth.password')}
+                                    placeholder={t('auth.password_field')}
                                 />
                                 <InputError message={errors.password} />
                             </div>

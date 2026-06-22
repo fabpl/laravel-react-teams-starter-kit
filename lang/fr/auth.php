@@ -3,6 +3,11 @@
 declare(strict_types=1);
 
 return [
+    // Validation
+    'failed' => 'Ces identifiants ne correspondent pas à nos dossiers.',
+    'password' => 'Le mot de passe saisi est incorrect.',
+    'throttle' => 'Nombre de tentatives de connexion dépassé. Veuillez réessayer dans :seconds secondes.',
+
     // Titres & descriptions des pages
     'login_title' => 'Connexion à votre compte',
     'login_description' => 'Saisissez votre e-mail et votre mot de passe pour vous connecter',
@@ -25,7 +30,7 @@ return [
     // Champs
     'email' => 'Adresse e-mail',
     'email_field' => 'E-mail',
-    'password' => 'Mot de passe',
+    'password_field' => 'Mot de passe',
     'confirm_password' => 'Confirmer le mot de passe',
     'name' => 'Nom',
     'full_name' => 'Nom complet',

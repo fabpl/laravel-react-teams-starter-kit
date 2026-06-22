@@ -69,14 +69,16 @@ export default function DeleteUser() {
                                             htmlFor="password"
                                             className="sr-only"
                                         >
-                                            {t('auth.password')}
+                                            {t('auth.password_field')}
                                         </Label>
 
                                         <PasswordInput
                                             id="password"
                                             name="password"
                                             ref={passwordInput}
-                                            placeholder={t('auth.password')}
+                                            placeholder={t(
+                                                'auth.password_field',
+                                            )}
                                             autoComplete="current-password"
                                         />
 
