@@ -20,6 +20,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select';
+import { useTranslation } from '@/lib/i18n';
 import { store as storeInvitation } from '@/routes/teams/invitations';
 import type { RoleOption, Team } from '@/types';
 
@@ -37,6 +38,7 @@ export default function InviteMemberModal({
     onOpenChange,
 }: Props) {
     const [inviteRole, setInviteRole] = useState<RoleOption['value']>('member');
+    const { t } = useTranslation();
 
     const handleOpenChange = (nextOpen: boolean) => {
         onOpenChange(nextOpen);
@@ -58,15 +60,19 @@ export default function InviteMemberModal({
                     {({ errors, processing }) => (
                         <>
                             <DialogHeader>
-                                <DialogTitle>Invite a team member</DialogTitle>
+                                <DialogTitle>
+                                    {t('teams.invite_modal_title')}
+                                </DialogTitle>
                                 <DialogDescription>
-                                    Send an invitation to join this team.
+                                    {t('teams.invite_modal_description')}
                                 </DialogDescription>
                             </DialogHeader>
 
                             <div className="grid gap-4">
                                 <div className="grid gap-2">
-                                    <Label htmlFor="email">Email address</Label>
+                                    <Label htmlFor="email">
+                                        {t('auth.email')}
+                                    </Label>
                                     <Input
                                         id="email"
                                         name="email"
@@ -79,7 +85,9 @@ export default function InviteMemberModal({
                                 </div>
 
                                 <div className="grid gap-2">
-                                    <Label htmlFor="role">Role</Label>
+                                    <Label htmlFor="role">
+                                        {t('teams.role')}
+                                    </Label>
                                     <Select
                                         name="role"
                                         data-test="invite-role"
@@ -91,7 +99,11 @@ export default function InviteMemberModal({
                                         }
                                     >
                                         <SelectTrigger className="w-full">
-                                            <SelectValue placeholder="Select a role" />
+                                            <SelectValue
+                                                placeholder={t(
+                                                    'teams.select_role',
+                                                )}
+                                            />
                                         </SelectTrigger>
                                         <SelectContent>
                                             {availableRoles.map((role) => (
@@ -110,7 +122,9 @@ export default function InviteMemberModal({
 
                             <DialogFooter className="gap-2">
                                 <DialogClose asChild>
-                                    <Button variant="secondary">Cancel</Button>
+                                    <Button variant="secondary">
+                                        {t('common.cancel')}
+                                    </Button>
                                 </DialogClose>
 
                                 <Button
@@ -118,7 +132,7 @@ export default function InviteMemberModal({
                                     data-test="invite-submit"
                                     disabled={processing}
                                 >
-                                    Send invitation
+                                    {t('teams.send_invitation')}
                                 </Button>
                             </DialogFooter>
                         </>

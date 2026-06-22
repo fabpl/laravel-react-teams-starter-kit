@@ -14,18 +14,20 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import { useTranslation } from '@/lib/i18n';
 import { dashboard } from '@/routes';
 import type { NavItem } from '@/types';
 
 export function AppSidebar() {
     const page = usePage();
+    const { t } = useTranslation();
     const dashboardUrl = page.props.currentTeam
         ? dashboard(page.props.currentTeam.slug)
         : '/';
 
     const mainNavItems: NavItem[] = [
         {
-            title: 'Dashboard',
+            title: t('nav.dashboard'),
             href: dashboardUrl,
             icon: LayoutGrid,
         },
@@ -33,12 +35,12 @@ export function AppSidebar() {
 
     const footerNavItems: NavItem[] = [
         {
-            title: 'Repository',
+            title: t('nav.repository'),
             href: 'https://github.com/laravel/react-starter-kit',
             icon: FolderGit2,
         },
         {
-            title: 'Documentation',
+            title: t('nav.documentation'),
             href: 'https://laravel.com/docs/starter-kits#react',
             icon: BookOpen,
         },

@@ -1,5 +1,7 @@
 import { Link, usePage } from '@inertiajs/react';
 import AppLogoIcon from '@/components/app-logo-icon';
+import { LanguageSwitcher } from '@/components/language-switcher';
+import { useTranslation } from '@/lib/i18n';
 import { home } from '@/routes';
 import type { AuthLayoutProps } from '@/types';
 
@@ -9,9 +11,15 @@ export default function AuthSplitLayout({
     description,
 }: AuthLayoutProps) {
     const { name } = usePage().props;
+    const { t } = useTranslation();
+    const translatedTitle = title ? t(title) : '';
+    const translatedDescription = description ? t(description) : '';
 
     return (
         <div className="relative grid h-dvh flex-col items-center justify-center px-8 sm:px-0 lg:max-w-none lg:grid-cols-2 lg:px-0">
+            <div className="absolute top-4 right-4 z-10">
+                <LanguageSwitcher />
+            </div>
             <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
                 <div className="absolute inset-0 bg-zinc-900" />
                 <Link
@@ -31,9 +39,11 @@ export default function AuthSplitLayout({
                         <AppLogoIcon className="h-10 fill-current text-black sm:h-12" />
                     </Link>
                     <div className="flex flex-col items-start gap-2 text-left sm:items-center sm:text-center">
-                        <h1 className="text-xl font-medium">{title}</h1>
+                        <h1 className="text-xl font-medium">
+                            {translatedTitle}
+                        </h1>
                         <p className="text-sm text-balance text-muted-foreground">
-                            {description}
+                            {translatedDescription}
                         </p>
                     </div>
                     {children}

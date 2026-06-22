@@ -16,6 +16,9 @@ declare module '@inertiajs/core' {
             sidebarOpen: boolean;
             currentTeam: Team | null;
             teams: Team[];
+            locale: string;
+            supportedLocales: string[];
+            translations: Record<string, Record<string, string>>;
             [key: string]: unknown;
         };
     }

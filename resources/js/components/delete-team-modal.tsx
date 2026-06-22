@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useTranslation } from '@/lib/i18n';
 import { destroy } from '@/routes/teams';
 import type { Team } from '@/types';
 
@@ -24,6 +25,7 @@ type Props = {
 
 export default function DeleteTeamModal({ team, open, onOpenChange }: Props) {
     const [confirmationName, setConfirmationName] = useState('');
+    const { t } = useTranslation();
 
     const canDeleteTeam = confirmationName === team.name;
 
@@ -47,10 +49,11 @@ export default function DeleteTeamModal({ team, open, onOpenChange }: Props) {
                     {({ errors, processing }) => (
                         <>
                             <DialogHeader>
-                                <DialogTitle>Are you sure?</DialogTitle>
+                                <DialogTitle>
+                                    {t('teams.delete_modal_title')}
+                                </DialogTitle>
                                 <DialogDescription>
-                                    This action cannot be undone. This will
-                                    permanently delete the team{' '}
+                                    {t('teams.delete_modal_description')}{' '}
                                     <strong>"{team.name}"</strong>.
                                 </DialogDescription>
                             </DialogHeader>
@@ -58,8 +61,9 @@ export default function DeleteTeamModal({ team, open, onOpenChange }: Props) {
                             <div className="space-y-4 py-4">
                                 <div className="grid gap-2">
                                     <Label htmlFor="confirmation-name">
-                                        Type <strong>"{team.name}"</strong> to
-                                        confirm
+                                        {t('teams.delete_type_prefix')}{' '}
+                                        <strong>"{team.name}"</strong>{' '}
+                                        {t('teams.delete_type_suffix')}
                                     </Label>
                                     <Input
                                         id="confirmation-name"
@@ -71,7 +75,9 @@ export default function DeleteTeamModal({ team, open, onOpenChange }: Props) {
                                                 event.target.value,
                                             )
                                         }
-                                        placeholder="Enter team name"
+                                        placeholder={t(
+                                            'teams.delete_name_placeholder',
+                                        )}
                                         autoComplete="off"
                                     />
                                     <InputError message={errors.name} />
@@ -80,7 +86,9 @@ export default function DeleteTeamModal({ team, open, onOpenChange }: Props) {
 
                             <DialogFooter className="gap-2">
                                 <DialogClose asChild>
-                                    <Button variant="secondary">Cancel</Button>
+                                    <Button variant="secondary">
+                                        {t('common.cancel')}
+                                    </Button>
                                 </DialogClose>
 
                                 <Button
@@ -89,7 +97,7 @@ export default function DeleteTeamModal({ team, open, onOpenChange }: Props) {
                                     data-test="delete-team-confirm"
                                     disabled={!canDeleteTeam || processing}
                                 >
-                                    Delete team
+                                    {t('teams.delete_button')}
                                 </Button>
                             </DialogFooter>
                         </>
