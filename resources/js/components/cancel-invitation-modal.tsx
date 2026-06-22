@@ -55,7 +55,9 @@ export default function CancelInvitationModal({
 
                 <DialogFooter className="gap-2">
                     <DialogClose asChild>
-                        <Button variant="secondary">{t('teams.keep_invitation')}</Button>
+                        <Button variant="secondary">
+                            {t('teams.keep_invitation')}
+                        </Button>
                     </DialogClose>
 
                     <Button

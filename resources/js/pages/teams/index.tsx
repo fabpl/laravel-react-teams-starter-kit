@@ -99,7 +99,9 @@ export default function TeamsIndex({ teams }: Props) {
                                                     </Button>
                                                 </TooltipTrigger>
                                                 <TooltipContent>
-                                                    <p>{t('teams.leave_team')}</p>
+                                                    <p>
+                                                        {t('teams.leave_team')}
+                                                    </p>
                                                 </TooltipContent>
                                             </Tooltip>
                                         ) : null}
@@ -123,7 +125,9 @@ export default function TeamsIndex({ teams }: Props) {
                                                     </Button>
                                                 </TooltipTrigger>
                                                 <TooltipContent>
-                                                    <p>{t('teams.view_team')}</p>
+                                                    <p>
+                                                        {t('teams.view_team')}
+                                                    </p>
                                                 </TooltipContent>
                                             </Tooltip>
                                         ) : (
@@ -145,7 +149,9 @@ export default function TeamsIndex({ teams }: Props) {
                                                     </Button>
                                                 </TooltipTrigger>
                                                 <TooltipContent>
-                                                    <p>{t('teams.edit_team')}</p>
+                                                    <p>
+                                                        {t('teams.edit_team')}
+                                                    </p>
                                                 </TooltipContent>
                                             </Tooltip>
                                         )}

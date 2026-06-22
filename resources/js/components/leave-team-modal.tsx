@@ -49,7 +49,9 @@ export default function LeaveTeamModal({ team, open, onOpenChange }: Props) {
 
                 <DialogFooter className="gap-2">
                     <DialogClose asChild>
-                        <Button variant="secondary">{t('common.cancel')}</Button>
+                        <Button variant="secondary">
+                            {t('common.cancel')}
+                        </Button>
                     </DialogClose>
 
                     <Button

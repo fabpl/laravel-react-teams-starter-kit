@@ -51,7 +51,8 @@ export default function PasskeyItem({ passkey, onDelete }: Props) {
                                 <span className="mx-1 text-muted-foreground/50">
                                     /
                                 </span>
-                                {t('auth.passkey_last_used')} {passkey.last_used_at_diff}
+                                {t('auth.passkey_last_used')}{' '}
+                                {passkey.last_used_at_diff}
                             </>
                         )}
                     </p>
@@ -66,24 +67,32 @@ export default function PasskeyItem({ passkey, onDelete }: Props) {
                         className="text-destructive hover:bg-destructive/10 hover:text-destructive"
                     >
                         <Trash2 className="h-4 w-4" />
-                        <span className="sr-only">{t('auth.remove_passkey')}</span>
+                        <span className="sr-only">
+                            {t('auth.remove_passkey')}
+                        </span>
                     </Button>
                 </DialogTrigger>
                 <DialogContent>
                     <DialogTitle>{t('auth.remove_passkey')}</DialogTitle>
                     <DialogDescription>
-                        {t('auth.remove_passkey_description', { name: passkey.name })}
+                        {t('auth.remove_passkey_description', {
+                            name: passkey.name,
+                        })}
                     </DialogDescription>
                     <DialogFooter className="gap-2">
                         <DialogClose asChild>
-                            <Button variant="secondary">{t('common.cancel')}</Button>
+                            <Button variant="secondary">
+                                {t('common.cancel')}
+                            </Button>
                         </DialogClose>
                         <Button
                             variant="destructive"
                             onClick={handleDelete}
                             disabled={isDeleting}
                         >
-                            {isDeleting ? t('auth.removing') : t('auth.remove_passkey')}
+                            {isDeleting
+                                ? t('auth.removing')
+                                : t('auth.remove_passkey')}
                         </Button>
                     </DialogFooter>
                 </DialogContent>

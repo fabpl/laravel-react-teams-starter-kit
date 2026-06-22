@@ -30,10 +30,10 @@ export default function DeleteUser() {
             />
             <div className="space-y-4 rounded-lg border border-red-100 bg-red-50 p-4 dark:border-red-200/10 dark:bg-red-700/10">
                 <div className="relative space-y-0.5 text-red-600 dark:text-red-100">
-                    <p className="font-medium">{t('teams.delete_warning_title')}</p>
-                    <p className="text-sm">
-                        {t('teams.delete_warning_body')}
+                    <p className="font-medium">
+                        {t('teams.delete_warning_title')}
                     </p>
+                    <p className="text-sm">{t('teams.delete_warning_body')}</p>
                 </div>
 
                 <Dialog>
@@ -104,7 +104,9 @@ export default function DeleteUser() {
                                                 type="submit"
                                                 data-test="confirm-delete-user-button"
                                             >
-                                                {t('settings.delete_account_button')}
+                                                {t(
+                                                    'settings.delete_account_button',
+                                                )}
                                             </button>
                                         </Button>
                                     </DialogFooter>

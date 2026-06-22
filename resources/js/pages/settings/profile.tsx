@@ -97,13 +97,18 @@ export default function Profile({
                                                 as="button"
                                                 className="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"
                                             >
-                                                {t('settings.resend_verification')}
+                                                {t(
+                                                    'settings.resend_verification',
+                                                )}
                                             </Link>
                                         </p>
 
-                                        {status === 'verification-link-sent' && (
+                                        {status ===
+                                            'verification-link-sent' && (
                                             <div className="mt-2 text-sm font-medium text-green-600">
-                                                {t('settings.profile_verification_sent')}
+                                                {t(
+                                                    'settings.profile_verification_sent',
+                                                )}
                                             </div>
                                         )}
                                     </div>

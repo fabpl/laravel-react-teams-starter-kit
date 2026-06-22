@@ -146,7 +146,9 @@ export function TeamSwitcher({ inHeader = false }: TeamSwitcherProps) {
                         onSelect={(event) => event.preventDefault()}
                     >
                         <Plus className={inHeader ? 'size-4' : 'h-4 w-4'} />
-                        <span className="text-muted-foreground">{t('teams.new_team')}</span>
+                        <span className="text-muted-foreground">
+                            {t('teams.new_team')}
+                        </span>
                     </DropdownMenuItem>
                 </CreateTeamModal>
             </DropdownMenuContent>

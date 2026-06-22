@@ -32,7 +32,9 @@ export default function LanguageTabs({
                             : 'text-neutral-500 hover:bg-neutral-200/60 hover:text-black dark:text-neutral-400 dark:hover:bg-neutral-700/60',
                     )}
                 >
-                    <span className="text-sm">{localeLabels[l] ?? l.toUpperCase()}</span>
+                    <span className="text-sm">
+                        {localeLabels[l] ?? l.toUpperCase()}
+                    </span>
                 </button>
             ))}
         </div>

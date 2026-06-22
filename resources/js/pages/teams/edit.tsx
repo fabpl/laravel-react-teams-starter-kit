@@ -253,7 +253,11 @@ export default function TeamEdit({
                                                     </Button>
                                                 </TooltipTrigger>
                                                 <TooltipContent>
-                                                    <p>{t('teams.remove_member')}</p>
+                                                    <p>
+                                                        {t(
+                                                            'teams.remove_member',
+                                                        )}
+                                                    </p>
                                                 </TooltipContent>
                                             </Tooltip>
                                         </TooltipProvider>
@@ -311,7 +315,11 @@ export default function TeamEdit({
                                                     </Button>
                                                 </TooltipTrigger>
                                                 <TooltipContent>
-                                                    <p>{t('teams.cancel_invitation')}</p>
+                                                    <p>
+                                                        {t(
+                                                            'teams.cancel_invitation',
+                                                        )}
+                                                    </p>
                                                 </TooltipContent>
                                             </Tooltip>
                                         </TooltipProvider>
@@ -331,7 +339,9 @@ export default function TeamEdit({
                         />
                         <div className="space-y-4 rounded-lg border border-red-100 bg-red-50 p-4 dark:border-red-200/10 dark:bg-red-700/10">
                             <div className="relative space-y-0.5 text-red-600 dark:text-red-100">
-                                <p className="font-medium">{t('teams.delete_warning_title')}</p>
+                                <p className="font-medium">
+                                    {t('teams.delete_warning_title')}
+                                </p>
                                 <p className="text-sm">
                                     {t('teams.delete_warning_body')}
                                 </p>

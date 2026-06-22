@@ -91,7 +91,9 @@ export default function PasskeyRegistration({ onSuccess }: Props) {
 
             <div className="flex gap-2">
                 <Button type="submit" disabled={isLoading || !name.trim()}>
-                    {isLoading ? t('auth.registering') : t('auth.register_passkey')}
+                    {isLoading
+                        ? t('auth.registering')
+                        : t('auth.register_passkey')}
                 </Button>
                 <Button type="button" variant="ghost" onClick={handleCancel}>
                     {t('common.cancel')}

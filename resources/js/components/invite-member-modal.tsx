@@ -60,7 +60,9 @@ export default function InviteMemberModal({
                     {({ errors, processing }) => (
                         <>
                             <DialogHeader>
-                                <DialogTitle>{t('teams.invite_modal_title')}</DialogTitle>
+                                <DialogTitle>
+                                    {t('teams.invite_modal_title')}
+                                </DialogTitle>
                                 <DialogDescription>
                                     {t('teams.invite_modal_description')}
                                 </DialogDescription>
@@ -68,7 +70,9 @@ export default function InviteMemberModal({
 
                             <div className="grid gap-4">
                                 <div className="grid gap-2">
-                                    <Label htmlFor="email">{t('auth.email')}</Label>
+                                    <Label htmlFor="email">
+                                        {t('auth.email')}
+                                    </Label>
                                     <Input
                                         id="email"
                                         name="email"
@@ -81,7 +85,9 @@ export default function InviteMemberModal({
                                 </div>
 
                                 <div className="grid gap-2">
-                                    <Label htmlFor="role">{t('teams.role')}</Label>
+                                    <Label htmlFor="role">
+                                        {t('teams.role')}
+                                    </Label>
                                     <Select
                                         name="role"
                                         data-test="invite-role"
@@ -93,7 +99,11 @@ export default function InviteMemberModal({
                                         }
                                     >
                                         <SelectTrigger className="w-full">
-                                            <SelectValue placeholder={t('teams.select_role')} />
+                                            <SelectValue
+                                                placeholder={t(
+                                                    'teams.select_role',
+                                                )}
+                                            />
                                         </SelectTrigger>
                                         <SelectContent>
                                             {availableRoles.map((role) => (
@@ -112,7 +122,9 @@ export default function InviteMemberModal({
 
                             <DialogFooter className="gap-2">
                                 <DialogClose asChild>
-                                    <Button variant="secondary">{t('common.cancel')}</Button>
+                                    <Button variant="secondary">
+                                        {t('common.cancel')}
+                                    </Button>
                                 </DialogClose>
 
                                 <Button

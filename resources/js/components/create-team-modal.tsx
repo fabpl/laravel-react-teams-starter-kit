@@ -35,19 +35,25 @@ export default function CreateTeamModal({ children }: PropsWithChildren) {
                     {({ errors, processing }) => (
                         <>
                             <DialogHeader>
-                                <DialogTitle>{t('teams.create_modal_title')}</DialogTitle>
+                                <DialogTitle>
+                                    {t('teams.create_modal_title')}
+                                </DialogTitle>
                                 <DialogDescription>
                                     {t('teams.create_modal_description')}
                                 </DialogDescription>
                             </DialogHeader>
 
                             <div className="grid gap-2">
-                                <Label htmlFor="name">{t('teams.team_name')}</Label>
+                                <Label htmlFor="name">
+                                    {t('teams.team_name')}
+                                </Label>
                                 <Input
                                     id="name"
                                     name="name"
                                     data-test="create-team-name"
-                                    placeholder={t('teams.team_name_placeholder')}
+                                    placeholder={t(
+                                        'teams.team_name_placeholder',
+                                    )}
                                     required
                                 />
                                 <InputError message={errors.name} />
@@ -55,7 +61,9 @@ export default function CreateTeamModal({ children }: PropsWithChildren) {
 
                             <DialogFooter className="gap-2">
                                 <DialogClose asChild>
-                                    <Button variant="secondary">{t('common.cancel')}</Button>
+                                    <Button variant="secondary">
+                                        {t('common.cancel')}
+                                    </Button>
                                 </DialogClose>
 
                                 <Button

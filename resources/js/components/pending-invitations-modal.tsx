@@ -67,7 +67,8 @@ export default function PendingInvitationsModal({
                                     {invitation.team.name}
                                 </p>
                                 <p className="text-sm text-muted-foreground">
-                                    {invitation.inviterName} {t('teams.invited_you')}
+                                    {invitation.inviterName}{' '}
+                                    {t('teams.invited_you')}
                                 </p>
                             </div>
 

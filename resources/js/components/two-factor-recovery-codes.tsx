@@ -95,7 +95,8 @@ export default function TwoFactorRecoveryCodes({
                                     disabled={processing}
                                     aria-describedby="regenerate-warning"
                                 >
-                                    <RefreshCw /> {t('auth.recovery_codes_regenerate')}
+                                    <RefreshCw />{' '}
+                                    {t('auth.recovery_codes_regenerate')}
                                 </Button>
                             )}
                         </Form>
@@ -148,11 +149,17 @@ export default function TwoFactorRecoveryCodes({
 
                                 <div className="text-xs text-muted-foreground select-none">
                                     <p id="regenerate-warning">
-                                        {t('auth.recovery_codes_warning_prefix')}{' '}
+                                        {t(
+                                            'auth.recovery_codes_warning_prefix',
+                                        )}{' '}
                                         <span className="font-bold">
-                                            {t('auth.recovery_codes_regenerate')}
+                                            {t(
+                                                'auth.recovery_codes_regenerate',
+                                            )}
                                         </span>{' '}
-                                        {t('auth.recovery_codes_warning_suffix')}
+                                        {t(
+                                            'auth.recovery_codes_warning_suffix',
+                                        )}
                                     </p>
                                 </div>
                             </>

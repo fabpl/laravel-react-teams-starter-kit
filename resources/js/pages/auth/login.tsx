@@ -66,7 +66,9 @@ export default function Login({
 
                             <div className="grid gap-2">
                                 <div className="flex items-center">
-                                    <Label htmlFor="password">{t('auth.password')}</Label>
+                                    <Label htmlFor="password">
+                                        {t('auth.password')}
+                                    </Label>
                                     {canResetPassword && (
                                         <TextLink
                                             href={request()}
@@ -94,7 +96,9 @@ export default function Login({
                                     name="remember"
                                     tabIndex={3}
                                 />
-                                <Label htmlFor="remember">{t('auth.remember_me')}</Label>
+                                <Label htmlFor="remember">
+                                    {t('auth.remember_me')}
+                                </Label>
                             </div>
 
                             <Button

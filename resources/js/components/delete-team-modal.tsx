@@ -49,7 +49,9 @@ export default function DeleteTeamModal({ team, open, onOpenChange }: Props) {
                     {({ errors, processing }) => (
                         <>
                             <DialogHeader>
-                                <DialogTitle>{t('teams.delete_modal_title')}</DialogTitle>
+                                <DialogTitle>
+                                    {t('teams.delete_modal_title')}
+                                </DialogTitle>
                                 <DialogDescription>
                                     {t('teams.delete_modal_description')}{' '}
                                     <strong>"{team.name}"</strong>.
@@ -73,7 +75,9 @@ export default function DeleteTeamModal({ team, open, onOpenChange }: Props) {
                                                 event.target.value,
                                             )
                                         }
-                                        placeholder={t('teams.delete_name_placeholder')}
+                                        placeholder={t(
+                                            'teams.delete_name_placeholder',
+                                        )}
                                         autoComplete="off"
                                     />
                                     <InputError message={errors.name} />
@@ -82,7 +86,9 @@ export default function DeleteTeamModal({ team, open, onOpenChange }: Props) {
 
                             <DialogFooter className="gap-2">
                                 <DialogClose asChild>
-                                    <Button variant="secondary">{t('common.cancel')}</Button>
+                                    <Button variant="secondary">
+                                        {t('common.cancel')}
+                                    </Button>
                                 </DialogClose>
 
                                 <Button
