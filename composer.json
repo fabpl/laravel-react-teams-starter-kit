@@ -1,11 +1,14 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/react-starter-kit",
+    "name": "fabpl/laravel-react-teams-starter-kit",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "A hardened Laravel + React starter kit with team management and a strict quality toolchain.",
     "keywords": [
         "laravel",
-        "framework"
+        "react",
+        "inertia",
+        "teams",
+        "starter-kit"
     ],
     "license": "MIT",
     "require": {
