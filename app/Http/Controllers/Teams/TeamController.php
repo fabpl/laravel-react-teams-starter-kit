@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Teams;
 
 use App\Actions\Teams\CreateTeam;
@@ -24,7 +26,7 @@ class TeamController extends Controller
      */
     public function index(Request $request): Response
     {
-        $user = $request->user();
+        $user = $this->authenticatedUser($request);
 
         return Inertia::render('teams/index', [
             'teams' => $user->toUserTeams(includeCurrent: true),
@@ -36,7 +38,7 @@ class TeamController extends Controller
      */
     public function store(SaveTeamRequest $request, CreateTeam $createTeam): RedirectResponse
     {
-        $team = $createTeam->handle($request->user(), $request->validated('name'));
+        $team = $createTeam->handle($this->authenticatedUser($request), $request->validated('name'));
 
         Inertia::flash('toast', ['type' => 'success', 'message' => __('Team created.')]);
 
@@ -48,7 +50,7 @@ class TeamController extends Controller
      */
     public function edit(Request $request, Team $team): Response
     {
-        $user = $request->user();
+        $user = $this->authenticatedUser($request);
 
         return Inertia::render('teams/edit', [
             'team' => [
@@ -57,7 +59,7 @@ class TeamController extends Controller
                 'slug' => $team->slug,
                 'isPersonal' => $team->is_personal,
             ],
-            'members' => $team->members()->get()->map(function (User $member) {
+            'members' => $team->members()->get()->map(function (User $member): array {
                 /** @var Membership $membership */
                 $membership = $member->getRelation('pivot');
 
@@ -73,12 +75,12 @@ class TeamController extends Controller
             'invitations' => $team->invitations()
                 ->whereNull('accepted_at')
                 ->get()
-                ->map(fn ($invitation) => [
+                ->map(fn ($invitation): array => [
                     'code' => $invitation->code,
                     'email' => $invitation->email,
                     'role' => $invitation->role->value,
                     'role_label' => $invitation->role->label(),
-                    'created_at' => $invitation->created_at->toISOString(),
+                    'created_at' => $invitation->created_at?->toISOString(),
                 ]),
             'permissions' => $user->toTeamPermissions($team),
             'availableRoles' => TeamRole::assignable(),
@@ -110,9 +112,11 @@ class TeamController extends Controller
      */
     public function switch(Request $request, Team $team): RedirectResponse
     {
-        abort_unless($request->user()->belongsToTeam($team), 403);
+        $user = $this->authenticatedUser($request);
 
-        $request->user()->switchTeam($team);
+        abort_unless($user->belongsToTeam($team), 403);
+
+        $user->switchTeam($team);
 
         return back();
     }
@@ -124,7 +128,7 @@ class TeamController extends Controller
     {
         Gate::authorize('leave', $team);
 
-        $user = $request->user();
+        $user = $this->authenticatedUser($request);
 
         $fallbackTeam = $user->isCurrentTeam($team)
             ? $user->fallbackTeam($team)
@@ -134,7 +138,7 @@ class TeamController extends Controller
             ->where('user_id', $user->id)
             ->delete();
 
-        if ($fallbackTeam) {
+        if ($fallbackTeam instanceof Team) {
             $user->switchTeam($fallbackTeam);
         }
 
@@ -148,22 +152,22 @@ class TeamController extends Controller
      */
     public function destroy(DeleteTeamRequest $request, Team $team): RedirectResponse
     {
-        $user = $request->user();
+        $user = $this->authenticatedUser($request);
         $fallbackTeam = $user->isCurrentTeam($team)
             ? $user->fallbackTeam($team)
             : null;
 
-        DB::transaction(function () use ($user, $team) {
+        DB::transaction(function () use ($user, $team): void {
             User::where('current_team_id', $team->id)
                 ->where('id', '!=', $user->id)
-                ->each(fn (User $affectedUser) => $affectedUser->switchTeam($affectedUser->personalTeam()));
+                ->each(fn (User $affectedUser): bool => $affectedUser->switchTeam($affectedUser->personalTeamOrFail()));
 
             $team->invitations()->delete();
             $team->memberships()->delete();
             $team->delete();
         });
 
-        if ($fallbackTeam) {
+        if ($fallbackTeam instanceof Team) {
             $user->switchTeam($fallbackTeam);
         }
 

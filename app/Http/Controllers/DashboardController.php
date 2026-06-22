@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Models\TeamInvitation;
@@ -11,7 +13,7 @@ class DashboardController extends Controller
 {
     public function __invoke(Request $request): Response
     {
-        $email = strtolower($request->user()->email);
+        $email = strtolower($this->authenticatedUser($request)->email);
 
         $pendingInvitations = TeamInvitation::query()
             ->with(['inviter', 'team'])
@@ -22,7 +24,7 @@ class DashboardController extends Controller
                 ->orWhere('expires_at', '>=', now()))
             ->latest()
             ->get()
-            ->map(fn (TeamInvitation $invitation) => [
+            ->map(fn (TeamInvitation $invitation): array => [
                 'code' => $invitation->code,
                 'inviterName' => $invitation->inviter->name,
                 'team' => [

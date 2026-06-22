@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Teams;
 
 use App\Enums\TeamRole;
@@ -27,7 +29,7 @@ class TeamInvitationController extends Controller
         $invitation = $team->invitations()->create([
             'email' => $request->validated('email'),
             'role' => TeamRole::from($request->validated('role')),
-            'invited_by' => $request->user()->id,
+            'invited_by' => $this->authenticatedUser($request)->id,
             'expires_at' => now()->addDays(3),
         ]);
 
@@ -60,9 +62,9 @@ class TeamInvitationController extends Controller
      */
     public function accept(RespondToTeamInvitationRequest $request, TeamInvitation $invitation): RedirectResponse
     {
-        $user = $request->user();
+        $user = $this->authenticatedUser($request);
 
-        DB::transaction(function () use ($user, $invitation) {
+        DB::transaction(function () use ($user, $invitation): void {
             $team = $invitation->team;
 
             $team->memberships()->firstOrCreate(

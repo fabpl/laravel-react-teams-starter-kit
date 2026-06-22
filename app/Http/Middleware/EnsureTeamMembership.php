@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Middleware;
 
 use App\Enums\TeamRole;
@@ -46,7 +48,7 @@ class EnsureTeamMembership
 
         abort_if(
             $requiredRole === null ||
-            $role === null ||
+            ! $role instanceof TeamRole ||
             ! $role->isAtLeast($requiredRole),
             403,
         );
@@ -60,7 +62,7 @@ class EnsureTeamMembership
         $team = $request->route('current_team') ?? $request->route('team');
 
         if (is_string($team)) {
-            $team = Team::where('slug', $team)->first();
+            return Team::where('slug', $team)->first();
         }
 
         return $team;
