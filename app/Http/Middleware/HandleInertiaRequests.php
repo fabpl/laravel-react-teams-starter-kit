@@ -49,7 +49,7 @@ class HandleInertiaRequests extends Middleware
             'teams' => fn () => $user?->toUserTeams(includeCurrent: true) ?? [],
             'locale' => app()->getLocale(),
             'supportedLocales' => config('app.supported_locales', ['en']),
-            'translations' => Inertia::once(fn () => $this->loadTranslations()),
+            'translations' => Inertia::once(fn (): array => $this->loadTranslations()),
         ];
     }
 
@@ -67,7 +67,7 @@ class HandleInertiaRequests extends Middleware
 
         $translations = [];
 
-        foreach (glob($path.'/*.php') as $file) {
+        foreach (glob($path.'/*.php') ?: [] as $file) {
             $namespace = basename($file, '.php');
             $groups = require $file;
 
