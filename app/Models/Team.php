@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Laravel\Cashier\Billable;
 use Override;
 
 /**
@@ -22,6 +23,10 @@ use Override;
  * @property string $name
  * @property string $slug
  * @property bool $is_personal
+ * @property string|null $stripe_id
+ * @property string|null $pm_type
+ * @property string|null $pm_last_four
+ * @property Carbon|null $trial_ends_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at
@@ -32,6 +37,7 @@ use Override;
 #[Fillable(['name', 'slug', 'is_personal'])]
 class Team extends Model
 {
+    use Billable;
     use GeneratesUniqueTeamSlugs;
 
     /** @use HasFactory<TeamFactory> */

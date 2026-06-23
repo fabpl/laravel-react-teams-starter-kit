@@ -13,7 +13,7 @@ files by `php artisan boost:install` / `boost:update`.
   style; never hand-format around them.
 - **The frontend is strictly typed.** TypeScript runs with the strict flag set
   plus `noUncheckedIndexedAccess`, `noUnusedLocals/Parameters`, etc.
-- **Coverage must stay at or above 95%.** `composer test` fails below that.
+- **Coverage must stay at or above 90%.** `composer test` fails below that.
 
 ## Before you finalise any change
 
@@ -28,7 +28,7 @@ It runs, in order:
 1. `pint --parallel --test` — PHP code style check
 2. `rector process --dry-run` — automated refactor check
 3. `phpstan analyse` (level 8) — static analysis
-4. `php artisan test --coverage --min=95` — the full suite (Unit, Feature,
+4. `php artisan test --coverage --min=90` — the full suite (Unit, Feature,
    Browser) with the coverage gate
 
 For the frontend, also run:

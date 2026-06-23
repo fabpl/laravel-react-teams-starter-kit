@@ -1,5 +1,11 @@
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, FolderGit2, LayoutGrid } from 'lucide-react';
+import {
+    BookOpen,
+    CreditCard,
+    FolderGit2,
+    LayoutGrid,
+    ShoppingBag,
+} from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
@@ -16,20 +22,31 @@ import {
 } from '@/components/ui/sidebar';
 import { useTranslation } from '@/lib/i18n';
 import { dashboard } from '@/routes';
+import { index as productsIndex } from '@/routes/products';
+import { index as subscriptionsIndex } from '@/routes/subscriptions';
 import type { NavItem } from '@/types';
 
 export function AppSidebar() {
     const page = usePage();
     const { t } = useTranslation();
-    const dashboardUrl = page.props.currentTeam
-        ? dashboard(page.props.currentTeam.slug)
-        : '/';
+    const { currentTeam } = page.props;
+    const dashboardUrl = currentTeam ? dashboard(currentTeam.slug) : '/';
 
     const mainNavItems: NavItem[] = [
         {
             title: t('nav.dashboard'),
             href: dashboardUrl,
             icon: LayoutGrid,
+        },
+        {
+            title: t('nav.subscriptions'),
+            href: currentTeam ? subscriptionsIndex(currentTeam.slug).url : '/',
+            icon: CreditCard,
+        },
+        {
+            title: t('nav.products'),
+            href: currentTeam ? productsIndex(currentTeam.slug).url : '/',
+            icon: ShoppingBag,
         },
     ];
 

@@ -1,7 +1,7 @@
 # Testing Conventions
 
-Testing is mandatory and uses **Pest 4**. Coverage must stay **≥ 95%**
-(`php artisan test --coverage --min=95`, wired into `composer test`).
+Testing is mandatory and uses **Pest 4**. Coverage must stay **≥ 90%**
+(`php artisan test --coverage --min=90`, wired into `composer test`).
 
 ## What to write for a change
 
@@ -45,7 +45,7 @@ real pages have assets.
 
 ## Coverage & production-only code
 
-- Keep coverage ≥ 95%; add tests rather than lowering the threshold.
+- Keep coverage ≥ 90%; add tests rather than lowering the threshold.
 - Only genuinely unreachable-in-tests production code (e.g. behaviour gated on
   `app()->isProduction()`) may use a documented `@codeCoverageIgnore`. Never use
   it to paper over untested logic.

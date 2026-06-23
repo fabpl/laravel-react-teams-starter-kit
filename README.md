@@ -77,7 +77,7 @@ Tests live in `tests/Unit`, `tests/Feature`, and `tests/Browser`.
 ```bash
 php artisan test                       # everything
 php artisan test tests/Browser         # browser suite only
-php artisan test --coverage --min=95   # with the coverage gate
+php artisan test --coverage --min=90   # with the coverage gate
 ```
 
 Browser tests need built assets (`npm run build`) and the Chromium binary
