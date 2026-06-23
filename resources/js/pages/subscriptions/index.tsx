@@ -26,8 +26,9 @@ export default function SubscriptionsIndex({
     const { currentTeam } = page.props;
     const [checkoutSuccess] = useState(
         () =>
+            typeof window !== 'undefined' &&
             new URL(window.location.href).searchParams.get('checkout') ===
-            'success',
+                'success',
     );
 
     useEffect(() => {
