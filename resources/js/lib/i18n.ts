@@ -1,5 +1,23 @@
 import { usePage } from '@inertiajs/react';
 
+function deepGet(
+    obj: Record<string, unknown>,
+    path: string,
+): string | undefined {
+    const parts = path.split('.');
+    let current: unknown = obj;
+
+    for (const part of parts) {
+        if (current && typeof current === 'object' && part in current) {
+            current = (current as Record<string, unknown>)[part];
+        } else {
+            return undefined;
+        }
+    }
+
+    return typeof current === 'string' ? current : undefined;
+}
+
 export function useTranslation() {
     const { translations } = usePage().props;
 
@@ -9,7 +27,7 @@ export function useTranslation() {
         const subkey = dotIndex === -1 ? '' : key.slice(dotIndex + 1);
         const group = translations[namespace];
         let value: string =
-            (group && subkey ? group[subkey] : undefined) ?? key;
+            (group && subkey ? deepGet(group, subkey) : undefined) ?? key;
 
         if (replacements) {
             for (const [placeholder, replacement] of Object.entries(

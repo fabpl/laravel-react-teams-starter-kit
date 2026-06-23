@@ -19,6 +19,8 @@ test('authenticated pages render without javascript errors', function (): void {
 
     visit([
         "/{$team->slug}/dashboard",
+        "/{$team->slug}/subscriptions",
+        "/{$team->slug}/products",
         '/settings/profile',
         '/settings/teams',
         '/settings/appearance',

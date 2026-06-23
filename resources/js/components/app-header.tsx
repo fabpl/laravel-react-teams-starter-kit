@@ -1,5 +1,13 @@
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-react';
+import {
+    BookOpen,
+    CreditCard,
+    Folder,
+    LayoutGrid,
+    Menu,
+    Search,
+    ShoppingBag,
+} from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import AppLogoIcon from '@/components/app-logo-icon';
 import { Breadcrumbs } from '@/components/breadcrumbs';
@@ -37,6 +45,8 @@ import { useInitials } from '@/hooks/use-initials';
 import { useTranslation } from '@/lib/i18n';
 import { cn, toUrl } from '@/lib/utils';
 import { dashboard } from '@/routes';
+import { index as productsIndex } from '@/routes/products';
+import { index as subscriptionsIndex } from '@/routes/subscriptions';
 import type { BreadcrumbItem, NavItem } from '@/types';
 
 type Props = {
@@ -59,6 +69,16 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
             title: t('nav.dashboard'),
             href: dashboardUrl,
             icon: LayoutGrid,
+        },
+        {
+            title: t('nav.subscriptions'),
+            href: currentTeam ? subscriptionsIndex(currentTeam.slug).url : '/',
+            icon: CreditCard,
+        },
+        {
+            title: t('nav.products'),
+            href: currentTeam ? productsIndex(currentTeam.slug).url : '/',
+            icon: ShoppingBag,
         },
     ];
 
